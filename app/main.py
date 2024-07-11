@@ -1,14 +1,28 @@
 import utils
 import read_csv
 import charts
+import pandas as pd
 
 def run():
-  data = read_csv.read_csv('data.csv')
+  
+  '''
+  
   data = list(filter(lambda item: item['Continent'] == 'Asia', data))
   countries = list(map(lambda x: x['Country'], data))
   percentages = list(map(lambda x: x['World Population Percentage'], data))
+  '''
+  
+  df = pd.read_csv('data.csv')#lectura de csv
+  df = df[df['Continent'] == 'Asia'] #obtener los datos donde la columna continent sea igual a Asia
+  
+  countries = df['Country'].values
+  percentages = df['World Population Percentage'].values
   charts.generate_pie_chart(countries, percentages)
 
+  
+  
+  data = read_csv.read_csv('data.csv')
+  
   
   country = input('Type Country => ')
   print(country)
